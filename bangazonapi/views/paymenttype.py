@@ -81,7 +81,7 @@ class Payments(ViewSet):
         """Handle GET requests to payment type resource"""
         payment_types = Payment.objects.all()
 
-        customer = request.auth.user
+        customer = Customer.objects.get(user=request.auth.user)
 
         if customer is not None:
             payment_types = payment_types.filter(customer__id=customer.id)
