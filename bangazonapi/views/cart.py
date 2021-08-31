@@ -53,7 +53,9 @@ class Cart(ViewSet):
         current_user = Customer.objects.get(user=request.auth.user)
         open_order = Order.objects.get(
             customer=current_user, payment_type=None)
-
+        line_item = OrderProduct.objects.filter(
+            product__id=pk, order=open_order)[0]
+        line_item.delete()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
