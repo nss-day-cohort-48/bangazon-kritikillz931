@@ -283,11 +283,7 @@ class Products(ViewSet):
             products = filter(price_filter, products)
 
         if product_location is not None:
-            def location_filter(product):
-                if product.location == (product_location):
-                    return True
-                return False
-            products = filter(location_filter, products)
+            products = products.filter(location__contains=product_location)
 
         serializer = ProductSerializer(
             products, many=True, context={'request': request})
