@@ -253,6 +253,7 @@ class Products(ViewSet):
         min_price = self.request.query_params.get('min_price', None)
         
         
+        
         if order is not None:
             order_filter = order
 
